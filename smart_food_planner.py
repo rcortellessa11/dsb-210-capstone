@@ -152,11 +152,11 @@ if user_ingredients:
                     filtered_df = filtered_df[filtered_df['total_time'] > 120]
 
             if calories != "Don't Care":
-                if calories == "Low cal (<300)":
+                if calories == 'Low cal (<300)':
                     filtered_df = filtered_df[filtered_df['calories'] < 300]
-                elif calories == "Average (300–600)":
+                elif calories == 'Average (300–600)':
                     filtered_df = filtered_df[(filtered_df['calories'] >= 300) & (filtered_df['calories'] <= 600)]
-                elif calories == "High (600–1000)":
+                elif calories == 'High (600–1000)':
                     filtered_df = filtered_df[(filtered_df['calories'] > 600) & (filtered_df['calories'] <= 1000)]
                 elif calories == "Don't look! (>1000)":
                     filtered_df = filtered_df[filtered_df['calories'] > 1000]
@@ -164,35 +164,35 @@ if user_ingredients:
             if fats != "Don't Care":
                 if fats == "Low Fat! (< 10)":
                     filtered_df = filtered_df[filtered_df['fat'] < 10]
-                elif fats == "Average Fat! (11-25)":
+                elif fats == 'Average Fat! (11-25)':
                     filtered_df = filtered_df[(filtered_df['fat'] >= 11) & (filtered_df['fat'] <= 25)]
-                elif fats == "High Fat! (> 25)":
+                elif fats == 'High Fat! (> 25)':
                     filtered_df = filtered_df[filtered_df['fat'] > 25]
 
             if carbs != "Don't Care":
-                if carbs == "Low Carbs! (< 25)":
+                if carbs == 'Low Carbs! (< 25)':
                     filtered_df = filtered_df[filtered_df['carbs'] < 25]
-                elif carbs == "Average Carbs! (25-80)":
+                elif carbs == 'Average Carbs! (25-80)':
                     filtered_df = filtered_df[(filtered_df['carbs'] >= 25) & (filtered_df['carbs'] <= 80)]
-                elif carbs == "High Carbs! (> 80)":
+                elif carbs == 'High Carbs! (> 80)':
                     filtered_df = filtered_df[filtered_df['carbs'] > 80]
 
             if proteins != "Don't Care":
-                if proteins == "Low Protein! (< 10)":
+                if proteins == 'Low Protein! (< 10)':
                     filtered_df = filtered_df[filtered_df['protein'] < 10]
-                elif proteins == "Average Protein! (11-29)":
+                elif proteins == 'Average Protein! (11-29)':
                     filtered_df = filtered_df[(filtered_df['protein'] >= 11) & (filtered_df['protein'] <= 29)]
-                elif proteins == "High Protein! (> 30)":
+                elif proteins == 'High Protein! (> 30)':
                     filtered_df = filtered_df[filtered_df['protein'] > 30]
 
             # After filtering, check again
             if filtered_df.empty:
-                st.warning("No recipes matched your filters. Try relaxing one or more options.")
+                st.warning('No recipes matched your filters. Try relaxing one or more options.')
 
             # Apply substitution matching
             df_with_substitutions = find_substitutable_matches_for_df(filtered_df, ingredients_list)
 
-            if st.button("Show me the money!"):
+            if st.button('Show me the money!'):
                 user_vector = get_average_embedding(ingredients_list, model).reshape(1, -1)
                 filtered_vectors = recipe_vectors[filtered_df.index]
                 similarities = cosine_similarity(user_vector, filtered_vectors)[0]
@@ -204,9 +204,9 @@ if user_ingredients:
                 for _, row in top_recipes.iterrows():
                     st.markdown(f"** {row['title']}**")
                     st.markdown(f"_{row['intro']}_")
-                    st.markdown(f"[ View Full Recipe]({row['recipe_url']})")
-                    st.markdown(f"**Main Ingredients:** `{row['ingredients_str']}`")
-                    if show_macros == "Yes please":
+                    st.markdown(f'[ View Full Recipe]({row['recipe_url']})')
+                    st.markdown(f'**Main Ingredients:** `{row['ingredients_str']}`')
+                    if show_macros == 'Yes please':
                         st.markdown(f"- **Time:** {row['total_time']} minutes | **Calories:** {row['calories']} | **Protein:** {row['protein']}g | **Carbs:** {row['carbs']}g | **Fat:** {row['fat']}g")
 
                     if len(row['matches']) > 0:

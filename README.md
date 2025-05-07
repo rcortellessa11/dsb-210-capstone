@@ -12,7 +12,7 @@ Metrics for Success:
 
 
 ### Data Sets
-- Scraped all recipes from allrecipes.com
+- Scraped all recipes from allrecipes.com (https://www.allrecipes.com)
 - Each recipes url is saved in data/scraped_urls
 - Final Dataframe modeled on: data/model_df.csv
 
